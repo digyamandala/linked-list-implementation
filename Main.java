@@ -16,7 +16,7 @@ public class Main {
       x.printAll();
 
       System.out.println();
-      System.out.println(x.at(x, 4));
+      System.out.println(x.at(4));
 
       x = x.remove(4);
       System.out.println();

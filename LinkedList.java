@@ -13,7 +13,7 @@ public class LinkedList<T> {
 
       private T value;
 
-      private Node next;
+      private Node<T> next;
 
       public Node(final T val) {
          setValue(val);
@@ -21,11 +21,11 @@ public class LinkedList<T> {
          setNext(null);
       }
 
-      public Node getNext() {
+      public Node<T> getNext() {
          return next;
       }
 
-      public void setNext(final Node next) {
+      public void setNext(final Node<T> next) {
          this.next = next;
       }
 
@@ -87,9 +87,9 @@ public class LinkedList<T> {
       return this;
    }
 
-   public <T> T at(LinkedList<T> linkedList, final int index) {
+   private T at(LinkedList<T> linkedList, final int index) {
 
-      Node curr = linkedList.head;
+      Node<T> curr = linkedList.head;
       int i = 0;
       while (i < index && i < linkedList.length) {
          curr = curr.getNext();
@@ -97,6 +97,10 @@ public class LinkedList<T> {
       }
 
       return (T) curr.getValue();
+   }
+
+   public T at(final int index) {
+      return at(this, index);
    }
 
    public void printAll() {

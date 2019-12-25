@@ -7,6 +7,8 @@ public class LinkedList<T> {
 
    private Node<T> head;
 
+   private Node<T> tail;
+
    private int length = 0;
 
    public static class Node<T> {
@@ -49,13 +51,11 @@ public class LinkedList<T> {
       final Node newNode = new Node(value);
 
       if (this.head == null) {
+         this.tail = newNode;
          this.head = newNode;
       } else {
-         Node curr = this.head;
-         while (curr.getNext() != null) {
-            curr = curr.getNext();
-         }
-         curr.setNext(newNode);
+         tail.setNext(newNode);
+         tail = tail.getNext();
       }
       length = length + 1;
       return this;
@@ -63,8 +63,7 @@ public class LinkedList<T> {
 
    public LinkedList<T> remove(final int index) {
 
-      Node del;
-      Node curr;
+      Node del, curr;
       if (index >= this.length) {
          return this;
       }
@@ -72,6 +71,9 @@ public class LinkedList<T> {
       if (index == 0) {
          del = this.head;
          this.head = this.head.getNext();
+         if (length == 1) {
+            tail = null;
+         }
       } else {
          int i = 0;
          curr = this.head;
@@ -81,26 +83,32 @@ public class LinkedList<T> {
          }
          del = curr.getNext();
          curr.setNext(del.getNext());
+         if (del == tail) {
+            tail = curr;
+         }
       }
       del = null;
       length = length - 1;
       return this;
    }
 
-   private T at(LinkedList<T> linkedList, final int index) {
+   public T at(final int index) {
+      return at(this, index);
+   }
 
+   private T at(LinkedList<T> linkedList, final int index) {
       Node<T> curr = linkedList.head;
       int i = 0;
+
+      if (index == length - 1) {
+         return tail.getValue();
+      }
       while (i < index && i < linkedList.length) {
          curr = curr.getNext();
          i = i + 1;
       }
 
-      return (T) curr.getValue();
-   }
-
-   public T at(final int index) {
-      return at(this, index);
+      return curr.getValue();
    }
 
    public void printAll() {

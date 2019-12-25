@@ -1,7 +1,6 @@
 /**
  * LinkedList
  */
-package linked_list;
 
 public class LinkedList<T> {
 
@@ -48,7 +47,7 @@ public class LinkedList<T> {
    }
 
    public LinkedList<T> pushBack(final T value) {
-      final Node newNode = new Node(value);
+      final Node<T> newNode = new Node<T>(value);
 
       if (this.head == null) {
          this.tail = newNode;
@@ -63,7 +62,7 @@ public class LinkedList<T> {
 
    public LinkedList<T> remove(final int index) {
 
-      Node del, curr;
+      Node<T> del, curr;
       if (index >= this.length) {
          return this;
       }
@@ -112,7 +111,7 @@ public class LinkedList<T> {
    }
 
    public void printAll() {
-      Node curr = this.head;
+      Node<T> curr = this.head;
 
       while (curr != null) {
          System.out.println(curr.getValue());
